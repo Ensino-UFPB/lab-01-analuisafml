@@ -1,1 +1,74 @@
 Coloque aqui todas as respostas das práticas indicadas no README.md
+
+Aluno: Ana Luísa Freitas Melo
+
+ROUTE
+1-  rede: 172.18.0.0
+    máscara: 255.255.0.0
+
+2-  Roteador padrão: 172.18.0.1
+
+3-  Rota padrão (0.0.0.0) direcionada para o gateway 172.18.0.1 pela interface eth0
+    Rota para a rede local (172.18.0.0/16) sem um gateway, os pacotes dentro dessa sub-rede podem ser entregues diretamente.
+
+IP
+1-  IP da interface de rede: 172.18.0.2.
+
+2-  rede: 172.18.0.0
+    máscara: 255.255.0.0 (/16).
+
+3-  Nome da interface de rede principal: eth0
+
+NSLOOKUP
+
+www.google.com
+IPv4: 172.217.30.100
+IPv6: 2800:3f0:4001:847::2004
+
+www.whitehouse.gov
+IPv4: 192.0.66.51
+IPv6: 2a04:fa87:fffd::c000:4233
+
+www.rnp.br
+IPv4: 104.18.26.22, 104.18.27.22
+IPv6: 2606:4700::6812:1b16, 2606:4700::6812:1a16
+
+www.ufpb.br
+IPv4: 150.165.254.52
+
+PING
+O tempo de resposta é <1ms
+o tempo do container foi em média 0.249ms
+
+ping www.ufpb.br: média de 30.011 ms
+ping www.yahoo.com: média de 62.852 ms
+ping www.brasil.gov.br: média de 71.073 ms
+ping www.dce.ufpb.br: unknown host
+
+O que pode influenciar as diferenças nos tempos?
+Número de roteadores no caminho e distância do servidor, quanto mais longe o servidor, maior o tempo de resposta.
+
+TRACEROUTE
+Alguns roteadores não respondem ao ping por questões de segurança, para evitar ataques DDoS ou por estarem configurados para ignorar pacotes ICMP. 
+Isso não significa necessariamente um problema na rede porque o tráfego normal pode continuar fluindo sem restrições.
+
+NETSTAT
+O comando route -n é mais simples e focado na exibição da tabela de roteamento de forma rápida e objetiva. 
+Já o netstat -r fornece informações adicionais, como detalhes das interfaces de rede e métricas das rotas, sendo mais útil para diagnósticos mais aprofundados.
+
+TELNET
+1- Sim, o servidor respondeu à tentativa de conexão via Telnet na porta 80 (HTTP), o que indica que o serviço está ativo e escutando nessa porta. 
+No entanto, a conexão foi encerrada logo após ser estabelecida, o que pode significar que o servidor não permite interações via Telnet ou exige um protocolo específico para comunicação.
+
+2- Não, a conexão falhou porque o nome do host www.dce.ufpb.br não pôde ser resolvido.
+Para diferenciar um problema de rede de um problema no serviço podemos nos basear pelo ping, se não funcionar pode ser uma falha na rede ou no DNS, 
+o domínio se não for encontrado, o problema pode estar na resolução de DNS, ou se outras portas funcionarem, mas a 21 não, o serviço FTP pode estar inativo ou bloqueado.
+
+MTR
+Ele pode ser útil para diagnosticar problemas de conexão e latência,
+identificar roteadores lentos ou com perda de pacotes e
+monitorar a qualidade da conexão até um destino específico.
+
+Para www.google.com, a conexão estável sem perda de pacotes.
+Para www.ufpb.br, há 12,5% de perda de pacotes no primeiro hop, o que pode indicar um problema na rede local ou no roteador inicial.
+Isso sugere que pode haver congestionamento ou falha na primeira etapa da rota para www.ufpb.br, impactando a conexão. 
